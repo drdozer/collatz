@@ -1,5 +1,5 @@
 # collatz
 Tinkering about with the collatz conjecture.
-This is primarily a repository for documentation and scripts relating to that documentation.
-Currently using Obsidian to organise the notes.
-Julia is the primary scripting language.
+This is primarily a repository of notes about the conjecture.
+I'm using Obsidian to take and organise notes.
+Scripting is in Julia.
