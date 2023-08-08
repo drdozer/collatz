@@ -1,0 +1,109 @@
+The 3n+1 problem is also known as the Ulam conjecture, Kakutani's problem, Thwaites conjecture, Hasse's algorithm, Syracuse problem, and most famously, the **Collatz** conjecture.
+In 1937, the mathematician Collatz published his eponymous conjecture ([[https://en.wikipedia.org/wiki/Collatz_conjecture|wikipedia]]). Despite the appearance of simplicity, it remains unsolved to this day.
+The Collatz Conjecture has become a pastime for amateur and professional mathematicians alike, not to mention attracting its own fair share of crackpots and cranks.
+If you are reading this book, then "Welcome!", and consider yourself inducted into these distinguished ranks.
+
+So now that we've whetted your whistle, let's describe what the conjecture is.
+The **collatz** function is defined for all positive whole numbers[^1].
+If the number is even, half it.
+If the number is odd, multiply it by three and add one.
+$$\mathit{collatz}(n) = \begin{cases}
+n/2, & \text{if } n \text{ is even} \\
+3n+1, & \text{if } n \text{ is odd}
+\end{cases}$$
+The result of the collatz function will always be another number[^2].
+You can apply the collatz function to that result and get another number.
+And so on and so on.
+We can call a sequence of numbers formed in this way a *collatz chain* or *collatz sequence*.
+The *Conjecture*[^3] says that for any starting number, all collatz chains will at some point reach the number 1.
+The number of steps may be very large. The numbers you meet along the way may also be very large, but ultimately it will reach 1.
+$$\begin{align}
+n&=1 & \mathit{or} \\ \mathit{collatz}(n)&=1 & \mathit{or} \\ \mathit{collatz}(\mathit{collatz}(n))&= 1 & \mathit{or} \\ \cdots
+\end{align}$$
+At first blush it's pretty obvious that this must be true. But something being obvious isn't the same thing as having a formal mathematical **proof** that it's true. 
+The purpose of this book is two-fold.
+Firstly, we will explore the Collatz function and Conjecture, exploring ways to think about them that move us closer towards solving it.
+Secondly, along the way we will visit a variety of interesting  mathematical tools and ideas that help us along the way.
+But first, let's have a play.
+Playing is the best form of learning, after all. Let's do the collatz thing with some small numbers and see what happens.
+$$\begin{align}
+\mathit{collatz}(1) =& 3 \times 1 + 1 &= 4 & :odd \\
+\mathit{collatz}(4) =& 4/2 &=2 &:even \\
+\mathit{collatz}(2) =& 2/2 &=1 &:odd
+\end{align}$$
+We can see that when we apply the collatz function to 1 repeatedly that we get back to 1, in the cycle $1 \rightarrow 4 \rightarrow 2 \rightarrow 1$.
+The smallest number not in that cycle is 3. So let's try that next.
+$$\begin{align}
+collatz(3) &=& 3 \times 3 + 1 &=& 10 &:odd \\
+collatz(10) &=& 10 / 2 &=& 5 &:even \\
+collatz(5) &=& 3 \times 5 + 1 &=& 16 &:odd \\
+collatz(16) &=& 16 / 2 &=& 8 &:even \\
+collatz(8) &=& 8 / 2 &=& 4 &:even \\
+collatz(4) &=& 4 / 2 &=& 2 &:even \\
+collatz(2) &=& 2 / 2 &=& 1 &:even \\
+\end{align}$$
+After 7 rounds, we reach 1, so the conjecture is satisfied for 3.
+Writing out the calculations like this long-hand is quite verbose, so we're going to adjust the arrow notation that we used to show the 1-cycle a bit.
+What calculation we apply at each step only depends upon if the number is even or odd.
+So if we colour the even numbers grey and the odd number green, we can capture the whole calculation visually without needing to write it out in full.
+We'll leave the terminal 1 uncoloured to highlight that it is the end of the series.
+$$\textcolor{green}{3} \rightarrow \textcolor{grey}{10} \rightarrow \textcolor{green}{5} \rightarrow \textcolor{grey}{16} \rightarrow \textcolor{grey}{8}\rightarrow \textcolor{grey}{4} \rightarrow \textcolor{grey}{2} \rightarrow 1$$
+That's quite nice, but it pushes all the focus upon the number.
+Another way to visualise this is to colour the arrows, green for arrows from odd numbers and grey for arrows from even numbers. 
+$$
+3 \textcolor{green}{\rightarrow} 
+10 \textcolor{grey}{\rightarrow} 
+5 \textcolor{green}{\rightarrow} 
+16 \textcolor{grey}{\rightarrow} 
+8 \textcolor{grey}{\rightarrow} 
+4 \textcolor{grey}{\rightarrow} 
+2 \textcolor{grey}{\rightarrow} 
+1$$
+These two diagrams have the exact same information.
+But the focus on the first form is on the numbers being even or odd, where as the focus on the second one is on the transformation of the number, if it is halved or multiplied.
+This switch between thinking about the numbers and thinking about the relationships between numbers will become a recurrent theme.
+The next number we've not tried yet, either explicitly or by hitting it along the way is 6.
+$$
+6 \textcolor{grey} \rightarrow
+3 \textcolor{green}{\rightarrow} 
+10 \textcolor{grey}{\rightarrow} 
+5 \textcolor{green}{\rightarrow} 
+16 \textcolor{grey}{\rightarrow} 
+8 \textcolor{grey}{\rightarrow} 
+4 \textcolor{grey}{\rightarrow} 
+2 \textcolor{grey}{\rightarrow} 
+1$$
+That ran into 3 right away, so we didn't really need to write this all out again.
+7 is the next number we haven't looked at. Let's look a that one next.
+$$
+7 \textcolor{green} \rightarrow
+22 \textcolor{grey} \rightarrow
+11 \textcolor{green} \rightarrow
+34 \textcolor{grey} \rightarrow
+17 \textcolor{green} \rightarrow
+52 \textcolor{grey} \rightarrow
+26 \textcolor{grey} \rightarrow
+13 \textcolor{green} \rightarrow
+40  \textcolor{grey} \rightarrow
+20  \textcolor{grey} \rightarrow
+10  \textcolor{grey} \rightarrow
+5  \textcolor{green} \rightarrow
+16  \textcolor{grey} \rightarrow
+8  \textcolor{grey} \rightarrow
+4  \textcolor{grey} \rightarrow
+2  \textcolor{grey} \rightarrow
+1$$
+Wow!
+That got out of hand quickly!
+The length of the chain is a whopping 17.
+It hit a bunch of primes along the way - 11, 17, 13.
+So perhaps primes are associated with long chains.
+Something to think about later.
+We can continue with this game, and I encourage you to do so.
+You may enjoy doing the calculations by hand, or you can automate them in a spreadsheet, or perhaps write a computer program to automate it.
+In fact, here's a [[Julia script for calculating collatz chains|code example]] to get you started, and will be providing short code examples throughout this book, if you find it helpful or fun.
+
+
+[^1]: more formally, the collatz function is defined for all natural numbers, $1, 2, 3, \dots$, which is important enough in maths that it has a standard symbol we use in equations, $\mathbb{N}$. Notice that $\mathbb{N}$ doesn't include either negative numbers or zero.
+[^2]: The type of things that a function can take is called the function's *domain*. So we could say that the collatz function has the domain $\mathbb{N}$. The *range* of a function is the type of thing that it returns. In this case, collatz also has the range $\mathbb{N}$, as whenever we feed it a natural number, it will always return another natural number. Trust me for now... we'll prove this is true later on. A shorthand for writing the domain and range of a function is to write it out as an arrow like this: $\mathit{collatz}:  \mathbb{N} \rightarrow \mathbb{N}$, which is the maths way of saying that collatz is a function that takes any natural number and returns a natural number. Sometimes this is expressed as mapping from natural numbers to natural numbers.
+[^3]: A *conjecture* in mathematics is something that is proposed, but does not have a proof. Conjetures are usually things that are intuitively obviously true or at least not obviously false, and the more famous ones inspire communities of mathematicians to hunt for the first or most elegant proof or disproof.
