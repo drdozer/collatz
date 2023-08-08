@@ -1,4 +1,4 @@
-In the [[All numbers are either even or odd|even/odd]] chapter, we derive various proof for even and odd numbers, as well as for the collatz function as it relates to even and odd numbers.
+In the [[All numbers are either odd or even|even/odd]] chapter, we derive various proof for even and odd numbers, as well as for the collatz function as it relates to even and odd numbers.
 Here we provide some julia functions that codify these.
 ```julia
 # even/odd predicates

@@ -8,14 +8,61 @@
         "type": "tabs",
         "children": [
           {
-            "id": "e7f7f43536a0006c",
+            "id": "ac82ba2384c25767",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Key equations.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
+      },
+      {
+        "id": "d7b638cd00a19fbe",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c2599d0dbef3ce96",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Collatz graph.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "0a75164819ae75f8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "The collatz function of even and odd numbers.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "82e8e076049c0d4b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Julia script for calculating collatz chains.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -81,6 +128,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Julia script for calculating collatz chains.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +145,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Julia script for calculating collatz chains.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +167,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Julia script for calculating collatz chains.md"
+              }
             }
           }
         ]
@@ -138,6 +189,19 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "e7f7f43536a0006c",
-  "lastOpenFiles": []
+  "active": "82e8e076049c0d4b",
+  "lastOpenFiles": [
+    "Branch to branch.md",
+    "Key equations.md",
+    "The collatz function of even and odd numbers.md",
+    "The Collatz Conjecture.md",
+    "All numbers are either odd or even.md",
+    "Collatz reacahability.md",
+    "Collatz graph.md",
+    "The Collatz Graph.md",
+    "Julia script for calculating collatz chains.md",
+    "Julia scripts for collatz generators.md",
+    "README.md",
+    "Topics or chapters.md"
+  ]
 }
