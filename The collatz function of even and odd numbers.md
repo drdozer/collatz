@@ -15,11 +15,14 @@ b = 3a+2 && \text{(integer b exists)}
 \end{align}$$
 Not only does this give us a proof that the collatz function always generates an even number from an odd one, but it gives us a way to construct all of the (even) integers reached by applying collatz to odd numbers, together with the odd number that they came from.
 $$\begin{align}
-\forall n: collatz(2n+1) = 6n + 4 \\
-\textit{gen\_collatz\_odd}(n): \langle \textit{gen\_odd}(n), \textit{gen\_even}(3n+2) \rangle
+\forall a: collatz(2a+1) = 6a + 4 \\
+\textit{gen\_collatz\_odd}(a): \langle \textit{gen\_odd}(a), \textit{gen\_even}(3a+2) \rangle
 \end{align}$$
 The pairs $\langle 2n+1, 6n+4 \rangle$ are all of the pairs of numbers linked by green arrows in the [[The Collatz Conjecture|introduction]].
 Notice that while every odd number is a source of an odd-to-even jump in the collatz function, only some even numbers are destinations.
+
+As we always reach an even number, we know we can immediately apply collatze again to derive:
+$$collatz(collatz(2a+1)) = 3a+2$$
 # The collatz function of even numbers could be even or odd
 Lastly, let's think about collatz for the even case.
 $$\begin{align}

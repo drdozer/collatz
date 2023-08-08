@@ -18,8 +18,9 @@ n/2, & \text{if } n \text{ is even} \\
 3n+1, & \text{if } n \text{ is odd}
 \end{cases} \\
 \\
-collatz(2a) &= a \\
-collatz(2a+1) &= 6a + 4 \\
+collatz(2a) &= a && \text{even}\\
+collatz(2a+1) &= 6a + 4 && \text{odd} \\
+collatz(collatz(2a+1)) &= 3a+2 && \text{even $\circ$ odd} \\
 \\
 \textit{gen\_even\_collatz}(a) &: \langle \textit{gen\_even}(a), a \rangle \\
 \textit{gen\_odd\_collatz}(a) &: \langle \textit{gen\_odd}(a), \textit{gen\_even}(3a+2) \rangle
