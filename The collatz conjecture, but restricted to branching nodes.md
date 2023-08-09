@@ -1,0 +1,80 @@
+The collatz conjecture says that for all natural numbers, repeatedly applying the collatz function will reach the value 1.
+In [[Branch to branch]] we showed that the full collatz graph can be collapsed down to just the graph over branching nodes, with no loss of numbers.
+If the conjecture holds for the branching nodes, then it holds everywhere.
+
+All nodes can be represented using the $\mathit{gen\_node}$ operation.
+Every node has an incoming even-even edge.
+It has one additional edge generated with one of $3a, 3a+1, 3a+2$.
+
+The smallest branch is at 4.
+It is the branch in the 4-2-1-4 loop.
+It is reached via the even-even link and the even-even-odd link, both where $a=0$.
+So any chain of branching nodes where $a$ reaches zero satisfies the collatz conjecture.
+
+All of the branching nodes $\textit{gen\_node}(a)$ are uniquely identified by their $a$.
+So when talking about branching nodes, we can dispose of the generators, and instead discuss the graph of $a$s.
+This decrufts the treatment substantially.
+For the sake of terminology, we will reserve the phrase branching nodes to refer to numbers within the collatz graph.
+We will use *points* to refer exclusively to the values of $a$ that generate those branching nodes.
+Given this, we can restate the nodes graph as the equivalent points graph.
+
+$$\begin{align}
+ee(a) &= \langle 4a+2,& a \rangle \\
+eeo(a) &= \langle 4a,& 3a \rangle \\
+eo(a) &= \langle 2a+1,& 3a+2 \rangle \\
+e^\infty o(a) &= &3a+1 \rangle \\
+\end{align}$$
+If we call the eqivalence of the collatz conjecture over points $colp$, then we can start saying things about it.
+In particular, if $colp$ is satisfied for the number on the right-hand-side of any of the edges, then it is satisfied for the left-hand-side also.
+We can describe an inductive procedure that corresponds to this by cases:
+$$colp(i) = \begin{cases}
+\top & i=0 && \text{[base case]} \\
+colp(a) & i = 4a+2 && \text{[ee]} \\
+colp(4a) & i = 3a && \text{[eeo]} \\
+colp(3a+2) & i = 2a+1 && \text{[eo]} \\
+... & i = 3a+1 && \text{[$e^\infty o$]} \\
+\end{cases}$$
+The $e^\infty o$ case is a bit more tricky.
+If we hit it, then it is a leaf point.
+It must be the left-hand point of some edge.
+So let's solve the three possibilities.
+If we are at $3a+1$, then we need to express the left-hand sides of the edges in terms of $a$.
+$$\begin{align}
+\text{case ee:} && 4b+2 &= 3a+1 \\
+&& b &= \frac{3}{4}a-\frac{1}{4} \\
+\text{case eeo:} && 4b &= 3a+1 \\
+&& b &= \frac{3}{4}a + \frac{1}{4}\\
+\text{case eo} && 2b+1 &= 3a+1 \\
+&& b &= \frac{3}{2}a\\
+\end{align}$$
+This has an interesting structure.
+If we rewite $a$ as $4i, 4i+1, 4i+2, 4i+3$ then we find that we can match each of the four options to one of the three left-hand sides.
+All other combinations fail to find a whole-number solution for b.
+$$\begin{align}
+\text{case } a=4i && b &= \frac{3}{2}(4i) && \text{[eo]} \\
+&& &= 6i\\
+&& &\langle 2(6i)+1, 3(6i+1)+2\rangle \\
+&& &\langle 12i+1, 18i+5\rangle \\
+\text{case } a=4i+1 && b &= \frac{3}{4}(4i+1) + \frac{1}{4} && \text{[eeo]} \\
+&&  &= 3i+1 \\
+&& & \langle 4(4i+1), 3(4i+1) \rangle \\
+&& & \langle 16i+4, 12i+3 \rangle \\
+\text{case } a=4i+2 && b &= \frac{3}{2}(4i+2) && \text{[eo]} \\
+&&  &= 6i+3 \\
+&& & \langle 2(4i+2)+1, 3(4i+2)+2 \rangle\\
+&& & \langle 6i+5, 12i+8 \rangle \\
+\text{case } a=4i+3 && b &= \frac{3}{4}(4i+3) - \frac{1}{4} && \text{[ee]} \\
+&&  &= 3i+2 \\
+&& & \langle 4(4i+3)+2, 4i \rangle \\
+&& & \langle 16i+14, 4i \rangle \\
+\end{align}$$
+What this is telling us is that the $e^\infty o$ cases cycle through attaching to the three edges in the order $eo, eeo, eo, ee$.
+
+# How the collatz conjecture could fail in the points graph
+The collatz conjecture is satisfied in the points graph, if starting at any point, following the edges we reach 0.
+As for the collatz conjecture, the two ways that a point could fail to reach zero would be if it was part of a closed loop $a>0$, or if it was a point from which the graph diverged to infinity.
+In the divergent case, there must be a smallest point on a divergent sequence.
+It must be reached from some larger point, but it must itself go on to only larger points.
+This restricts candidate points to the left-hand side of the $eo$ edge type.
+Likewise, in a closed loop, there must be a smallest point on the loop, which must also be on an $eo$ edge.
+Unlike a divergence, a loop must also have a largest point.

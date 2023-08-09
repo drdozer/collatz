@@ -4,20 +4,35 @@ However, this doesn't prove the collatz conjecture.
 It's possible that there's some subset of the natural numbers that never join up with the graph that passes through 1.
 Perhaps we can make progress by better understanding the topology of the graph.
 
+# All numbers are branches or between branches
+
 The graph itself has two kinds of nodes.
 All nodes have a single out-going link.
 However, the even numbers reached from odd numbers have two incoming links.
 They are the branching nodes.
 Is it possible to collapse away all the other numbers, leaving only the branching nodes behind, without loosing any generality?
-To prove this, we need to show that all numbers are branches themselves, or are between two branches.
 
-The branches themselves are the numbers $6a+4$.
-So that leaves us all the other numbers $6a+b$ where b is is one of ${0,1,2,3,5}$ that are not branch points.
-We can repeatedly extend the collatz graph out from these numbers in both directions until they reach a branch.
+We first need to prove that all numbers either are a branching node, or that collatz is guaranteed to reduce them to one.
+This is fairly easy to show.
+All branches can be written $\textit{collatz}(n)$ for some odd number $n=2a+1$.
+All even numbers can be generated as  $n2^p$ for each odd $n$ and all non-negative integers $p$.
+Applying collatz $p$ times to $n2^p$ will return $n$.
+So all even numbers eventually hit an odd number (even if that odd number is 1), and therefore hit a branching node.
+# All paths from a branch to the next branch
 
-We should consider two branches, generated at two different choices of $a$. We're going to start at $a_1$ and try to make progress towards another branch by repeatedly applying collatz.
+Now that we know that the entire collatz graph can be represented completely as branching nodes, we can look at how the branching nodes wire together.
+That will allow us to reduce claims about the collatz graph as s whole to claims about the graph of the branching nodes.
+Here we derive all the ways that repeatedly applying collatz to a branching node can reach the closest other branching node.
+
+We will start at some branching node $n_1 = 6a+4$.
+We're going to repeatedly apply collatz until we reach another branching node $n_2 = 6b+4$.
+The proofs that follow are repetitive, restarting from $n_1$ each time.
+They work by repeatedly applying collatz, checking if the result is a branching node, and if not, potentially refactoring the current expression so that we can again apply collatz.
+
+Firstly, we will check if there are any direct node-node links.
 
 $$\begin{align}
+n_1 &= 6a_1+4 && \text{node}\\
 collatz(6a_1+4) &= 3a_1+2 && \text{even} \\
 \textit{is\_branch}(3a_1+2) &\implies \exists b: 6b+4=3a_1+2 \\
 &\implies b = \frac{1}{2}a+\frac{2}{3} && \text{$b \notin \mathbb{Z}$} \\
@@ -25,21 +40,25 @@ collatz(6a_1+4) &= 3a_1+2 && \text{even} \\
 \end{align}$$
 So the number reached by applying the even rule to the branch is never itself a branch.
 However, it could itself be even or odd, depending on if $a_1$ is even or odd.
+Both appear possible, so we'll test one and then the other.
 
 Let's trace the even case first.
 We can substitute in a new variable $a_2$ where $2a_2=a_1$.
 
 $$\begin{align}
-collatz(3a_1+2) &= \\
-a_1 = 2a_2 & && \text{even case}\\
-collatz(3(2a_2)+2) &= 3a_2+1  \\
+n_1 &= 6a_1+4 && \text{node} \\
+collatz(6a_1+4) &= 3a_1+2 && \text{even}\\
+a_1 = 2a_2 \\
+3a_1+2 = 3(2a_2)+2\\
+collatz(3(2a_2)+2) &= 3a_2+1 && \text{even}  \\
 \textit{is\_branch}(3a_2+1) &\implies \exists b : 6b+4=3a_2+1 \\
 &\implies b = \frac{1}{2}a_2-\frac{1}{2} && \text{for odd $a_2$}\\
-\text{case } a_2 = 2a_3+1 \\
+a_2 = 2a_3+1 \\
 & = \frac{1}{2}(2a_3+1)-\frac{1}{2}\\
 & = a_3 \\
 \end{align}$$
 This is our first successful traversal between two nodes, indexed by $a_1$ and $a_3$.
+We've shown that when $a_2$ itself is odd, the collatz sequence always hits a branching node.
 Substituting all the values in, we get:
 $$\begin{align}
 a_2 &= 2a_3+1, \\
@@ -52,8 +71,8 @@ n_2 &= 6a_3+4 \\
 \end{align}
 $$
 This tells us that we can generate exactly the pairs of nodes within the collatz graph linked by two even cases as $\langle 24a+16, 6a+4\rangle$, and indeed, you can see that the two nodes differ by a factor of 4.
-The first few of these pairs are as follows:
-
+Expressed as node-generators we get the following pair:
+$$\textit{node}\xrightarrow{even} \bullet \xrightarrow{even} \textit{node}: \langle 6(4a+2)+4, 6a+4\rangle$$
 $$\begin{matrix}
 a & n_1 & n_2 \\
 0 & 16 & 4 \\
@@ -61,36 +80,39 @@ a & n_1 & n_2 \\
 2 & 64 & 16 \\
 3 & 88 & 22 \\
 \end{matrix}$$
-These links go node-even-node.
-They never touch an odd number.
+
 
 We will pick up our analysis again, looking at the case where $a_2$ is not odd.
 $$\begin{align}
+n_1 &= 6a_1+4 && \text{node} \\
+collatz(6a_1+4) &= 3a_1+2 && \text{even}\\
+a_1 = 2a_2 \\
+3a_1+2 = 3(2a_2)+2\\
+collatz(3(2a_2)+2) &= 3a_2+1  && \text{even} \\
 collatz(3a_2+1) &= \\
-a_2 = 2a_3 & && \text{even $a_2$ case}\\
-collatz(6a_3+1) &= 3(6a_3+1) + 1 && \text{odd case}\\
+a_2 = 2a_3 & && \text{even $a_2$}\\
+collatz(6a_3+1) &= 3(6a_3+1) + 1 && \text{odd}\\
 &= 18a_3 + 3 + 1 \\
 &= 18a_3+4 \\
 a_4 = 3a_3 \\
 &= 6a_4 + 4 && \text{node}\\
-
  \\
 \end{align}$$
 
-So we've derived a second kind of link, that goes node-even-odd-node.
+So we've derived a second kind of link, that goes node-even-even-odd-node.
 $$\begin{align}
-3a_3 &= a_4, \\
+xa_4 &= 3a_3, \\
 a_2 &= 2a_3, \\
 a_1 &= 2a_2 \\
 &= 4a_3 \\
-&= \frac{4}{3}a_4 \\
 n_1 &= 6a_1+4 \\
 &= 24a_3+4 \\
 n_2 &= 6a_4+4 \\
 &= 18a_3+4 \\
 \end{align}$$
 This one is a bit different, in that the 'anchor' generator is $a_3$, from which both $a_4$ and $a_1$ can be calculated.
-
+Refactoring this to the node generator form gives us:
+$$\textit{node} \xrightarrow{even} \bullet \xrightarrow{even} \bullet \xrightarrow{odd} \textit{node} : \langle 6(4a) + 4, 6(3a) + 4 \rangle$$
 $$\begin{matrix}
 a & n_1 & n_2 \\
 0 & 4 & 4 \\
@@ -98,3 +120,60 @@ a & n_1 & n_2 \\
 2 & 52 & 40 \\
 3 & 76 & 56 \\
 \end{matrix}$$
+The last case goes back to the case where the initial value from the collatz of a node is itself odd.
+$$\begin{align}
+n_1 &= 6a_1+4 && \text{node} \\
+collatz(6a_1+4) &= 3a_1+2 && \text{even}\\
+a_1 = 2a_2+1 & && \text{odd $a_1$}\\
+ &= 3(2a_2+1)+2 \\
+&= 6a_2+5\\
+collatz(6a_2+5) &= 3(6a_2+5)+1 \\
+&= 18a_2+16 \\
+\textit{is\_branch}(18a_2+16) &\implies \exists b: 6b+4 = 18a_2+16 \\
+&\implies b=3a_2+2 && \text{node}\\
+\end{align}$$
+This gives us the third links.
+These are the node-odd-node links.
+$$\begin{align}
+n_1 &= 6a_1+4 \\
+&= 6(2a_2+1)+4 \\
+n_2 &= 18a_2+16 \\
+&= 6(3a_2+2)+4
+\end{align}$$
+In node generator form, this gives:
+$$\textit{node} \xrightarrow{even} \bullet \xrightarrow{odd} \textit{node} : \langle 6(2a+1) + 4, 6(3a+2) + 4 \rangle$$
+$$\begin{matrix}
+a & n_1 & n_2 \\
+0 & 10 & 16 \\
+1 & 22 & 34 \\
+2 & 34 & 52 \\
+3 & 46 & 70 \\
+\end{matrix}$$
+This exhausts all of our possible cases.
+So there are exactly 3 types of path from a branching node to the next reachable branching node.
+
+We have odd cases for $3a$ and $3a+2$ but not case for $3a+1$.
+It is easy to find examples of branches generated at $3a+1$ that are obviously reachable from *somewhere*, but we've shown that they can't be reached from any other branching nodes.
+So where do they come from?
+
+The smallest branching node of this form is 10.
+It is reached from 3, as well as 20.
+The number 3 is quite interesting, as it is reached only from 6, which can be reached only from 12, which can only be reached from 24, and so on.
+In fact, this looks like it is one of our $n2^p$ series that we noted in the beginning.
+So it looks like all nodes generated by $3a+1$ are the destination of an odd number that is the root of a power-two series that contains no other nodes.
+Let's just check though.
+
+$$\begin{align}
+m &= 6(3a+1)+4 && \text{node at $3a+1$}\\
+ &= 18a+10 \\
+ collatz(n) &= m && \text{odd $n$ that reached $m$}\\
+3n+1 &= 18a + 10 \\
+n &= 6a+3
+\end{align}$$
+One chain of ancestors of $n$ are of the form $n2^p$.
+If any of these ancestors are a node, they can be re-written as $6b+4$ for some value of $b$.
+$$\begin{align}
+(6a+3)2^p &= 6b+4 \\
+(2a+1)2^p &= 2b+\frac{4}{3}\\
+\end{align}$$
+There are obviously no integer solutions to this equation, so no node exists within the chain of ancestors.

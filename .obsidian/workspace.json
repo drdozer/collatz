@@ -14,8 +14,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "The Collatz Conjecture.md",
-                "mode": "preview",
+                "file": "Key equations.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -52,6 +52,18 @@
             }
           },
           {
+            "id": "85f788351e324f4a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "The collatz conjecture, but restricted to branching nodes.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
             "id": "82e8e076049c0d4b",
             "type": "leaf",
             "state": {
@@ -64,7 +76,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -130,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Branch to branch.md",
+                "file": "The collatz conjecture, but restricted to branching nodes.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -147,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Branch to branch.md",
+                "file": "The collatz conjecture, but restricted to branching nodes.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Branch to branch.md"
+                "file": "The collatz conjecture, but restricted to branching nodes.md"
               }
             }
           }
@@ -191,19 +203,20 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "0a75164819ae75f8",
+  "active": "85f788351e324f4a",
   "lastOpenFiles": [
-    "The Collatz Conjecture.md",
-    "Branch to branch.md",
     "Key equations.md",
+    "The collatz conjecture, but restricted to branching nodes.md",
+    "Branch to branch.md",
+    "Topics or chapters.md",
+    "Collatz reacahability.md",
     "The collatz function of even and odd numbers.md",
+    "Collatz graph.md",
+    "The Collatz Conjecture.md",
     "Julia script for calculating collatz chains.md",
     "All numbers are either odd or even.md",
-    "Collatz reacahability.md",
-    "Collatz graph.md",
     "The Collatz Graph.md",
     "Julia scripts for collatz generators.md",
-    "README.md",
-    "Topics or chapters.md"
+    "README.md"
   ]
 }

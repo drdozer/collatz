@@ -25,3 +25,19 @@ collatz(collatz(2a+1)) &= 3a+2 && \text{even $\circ$ odd} \\
 \textit{gen\_even\_collatz}(a) &: \langle \textit{gen\_even}(a), a \rangle \\
 \textit{gen\_odd\_collatz}(a) &: \langle \textit{gen\_odd}(a), \textit{gen\_even}(3a+2) \rangle
 \end{align}$$
+Branching nodes
+$$\begin{align}
+\textit{gen\_node}(a) &= 6a+4 \\
+\textit{node}\xrightarrow{even} \bullet \xrightarrow{even} \textit{node}&: \langle \textit{gen\_node}(4a+2), & \textit{gen\_node}(a)\rangle \\
+\textit{node} \xrightarrow{even} \bullet \xrightarrow{even} \bullet \xrightarrow{odd} \textit{node} &: \langle \textit{gen\_node}(4a), &\textit{gen\_node}(3a) \rangle \\
+\textit{node} \xrightarrow{even} \bullet \xrightarrow{odd} \textit{node} &: \langle \textit{gen\_node}(2a+1), &\textit{gen\_node}(3a+2) \rangle \\
+\text{no parent node} &: &\textit{gen\_node}(3a+1) \;\\
+\end{align}$$
+
+Points graph
+$$\begin{align}
+ee(a) &= \langle 4a+2,& a \rangle \\
+eeo(a) &= \langle 4a,& 3a \rangle \\
+eo(a) &= \langle 2a+1,& 3a+2 \rangle \\
+e^\infty o(a) &= &3a+1 \rangle \\
+\end{align}$$
