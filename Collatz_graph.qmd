@@ -1,3 +1,4 @@
+# Collatz graph
 
 In mathematics, a graph is a collection of nodes[^1] linked by a collection of edges[^2] .
 The nodes are typically used to represent the things that the graph is about, while the edges represent how those things relate to one-another.
@@ -17,9 +18,8 @@ In fact, our collatz sequences with green and grey arrows is a way of displaying
 It is a fairly boring, linear type of graph.
 But we can look at much more interesting subsets of the collatz graph by overlaying the collatz sequence for choices of $n$ starting at 1 and going up to some upper bound.
 
-```python
-import networkx as nx
-import matplotlib.pyplot as plt
+```{python}
+#| output: asis
 
 def collatz(n):
 	if n % 2 == 0:
@@ -27,25 +27,30 @@ def collatz(n):
 	else:
 		return 3*n+1
 
-nodes = []
-edges = []
+def the_graph():
+	nodes = []
 
-for n in range(1, 100):
-	print(n)
-	while True:
-		if n in nodes:
-			println()
-			break
-		m = collatz(n)
-		edges.append((n, m))
-		n = m
+	for n in range(1, 25):
+		if n % 2 == 0:
+			print(f"{n}[{n}];")
+		else:
+			print(f"{n}(({n}));")
+		while True:
+			if n in nodes:
+				break
+			nodes.append(n)
+			m = collatz(n)
+			print(f"{n} --> {m};")
+			n = m
 
-G = nx.Graph()
-G.add_edges_from(edges)
-nx.draw_networkx(G)
-plt.show()
+print('```{mermaid}')
+print("graph RL;")
+the_graph()
+print('```')
 ```
+
+
 
 [^1]: A node is also sometimes called a vertex.
 [^2]: There is no alternative name for an edge, although they are sometimes called links.
-[^3]: Something is induced, if by existing it in some sense makes something else exist.
+[^3]: Something is induced by something else, if by that something else existing it in some sense made to exist.	
