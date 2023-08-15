@@ -1,4 +1,5 @@
-project: 
+project:
+  type: website
   output-dir: out
 execute:
   echo: false
