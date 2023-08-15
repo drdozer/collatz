@@ -1,0 +1,8 @@
+title: "My Document"
+project: 
+  output-dir: out
+execute:
+  echo: false
+jupyter: python3
+editor:
+  render-on-save: true
