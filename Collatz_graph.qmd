@@ -3,8 +3,8 @@
 In mathematics, a graph is a collection of nodes[^1] linked by a collection of edges[^2] .
 The nodes are typically used to represent the things that the graph is about, while the edges represent how those things relate to one-another.
 Edges can be undirected or directed.
-Directed edges strongly distinguish between an edge $\langle a, b \rangle$ and $\langle b, a \rangle$, where as an undirected graph treats these two as equivalent.
-There is a  large field of mathematics that studies graphs, their topologies, and graph functions that transform nodes, edges and entire graphs, as well as their statistical properties.
+Directed edges strongly distinguish between the edges $\langle a, b \rangle$ and $\langle b, a \rangle$, where as an undirected graph treats these two as equivalent.
+There is a  large field of mathematics that studies graphs, their topologies, functions transforming graphs, their nodes and edges, as well as their statistical properties.
 
 Nodes can be labelled, so that they carry additional information.
 So can the edges.
@@ -49,7 +49,9 @@ the_graph()
 print('```')
 ```
 
-
+Looking at this fragment of the collatz graph, we can see that each number has a distance from 1.
+This is the depth of that node.
+As you can see, the depth of any given number tends to increase as the number increases, but this isn't a simple linear relationship. 
 
 [^1]: A node is also sometimes called a vertex.
 [^2]: There is no alternative name for an edge, although they are sometimes called links.
