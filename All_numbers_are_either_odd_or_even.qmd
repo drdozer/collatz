@@ -1,3 +1,5 @@
+# All numbers are either odd or even
+
 It is obvious that all numbers are either even or odd.
 But maths isn't about what is obvious.
 Instead, it is about what we can prove.
@@ -72,12 +74,14 @@ The $\wedge$ symbol is logical *and*.
 The $\top$ and $\bot$ symbols are true and false respectively.
 
 Let us say there was a number $a$ that is not even and not odd, and let's plug this in to our definitions.
+
 $$\begin{align}
 \neg even(a) \wedge \neg odd(a) && \text{(proposition)}\\
 \neg even(a) = odd(a) && \text{(definition of odd)} \\
 odd(a) \wedge \neg odd(a) && \text{(substitute )} \\
 \bot && \text{(contradiction)}
 \end{align}$$
+
 # A constructive definition of odd numbers
 
 In the previous proof, we showed that if we define odd numbers as all numbers that are not even, we can show that there's a contradiction if a number is both odd and even.
@@ -107,9 +111,8 @@ n = 2a, && \text{(definition of even for $n$ )} \\
 a + \frac{1}{2} = b, && \text{(divide by 2)} \\
 a \in \mathbb{Z} \implies b \notin \mathbb{Z} \implies \bot, && \text{(contradicts $b \in \mathbb{Z}$)} \\
 b \in \mathbb{Z} \implies a \notin \mathbb{Z} \implies \bot. && \text{(contradicts $a \in \mathbb{Z}$)}
-
-
 \end{align}$$
+
 We have proven another contradiction.
 Remember that both $a$ and $b$ must be integers.
 But if $a$ is an integer then $b = a+\frac{1}{2}$ is definitely not an integer, and if $b$ is an integer then $a = b - \frac{1}{2}$ is also not an integer.
@@ -119,6 +122,7 @@ $$even(n) \iff odd(n+1)$$
 This gives us a constructive definition of odd:
 $$\textit{odd}(n) \iff \exists m \in \mathbb{Z}: n = 2m + 1$$
 Armed with this, we can define the corresponding test and generator functions:
+
 $$\begin{align}
 \mathit{test\_odd}(n) &: n \mod 2 = 1 \\
 \mathit{gen\_odd}(n) &: 2n+1
@@ -126,6 +130,7 @@ $$\begin{align}
 
 What can we say about $n+1$ for odd values of $n$?
 Again, we can use proof by contradiction.
+
 $$\begin{align}
 odd(n) \wedge odd(n+1) \implies && \text{(proposition)} \\
 n = 2a+1, && \text{(definition of odd for $n$)} \\
@@ -135,10 +140,11 @@ n+1 = 2b + 1, && \text{(defnition of odd for $n+1$)}\\
 a + \frac{1}{2} = b, &&\text{(divide by 2)}\\
 a \in \mathbb{Z} \implies b \notin \mathbb{Z} \implies \bot, && \text{(contradicts $b \in \mathbb{Z}$)} \\
 b \in \mathbb{Z} \implies a \notin \mathbb{Z} \implies \bot. && \text{(contradicts $a \in \mathbb{Z}$)}
-
 \end{align}$$
+
 This looks pretty similar to the previous proof, and shows that one more than an odd number is not itself odd.
 Lastly, let's show that it is actually even, just to make sure.
+
 $$\begin{align}
 odd(n) \implies n &= 2a+1 && \text{(definition of odd)}\\
 m &= n + 1 && \text{(let's name $n+1$)}\\
@@ -148,9 +154,12 @@ m &= n + 1 && \text{(let's name $n+1$)}\\
 b &= a+1 && \text{(name $a+1$)}\\
 m = 2b &\implies even(m) && \text{(definition of even)}
 \end{align}$$
+
 # Sums of even and odd numbers
+
 Next, we will show that adding two even numbers gives you an even number, adding two odd numbers gives you an odd number and adding two odd numbers gives you an even number.
 We will prove it by substituting in the definitions, shuffling a bit, and showing that the existential quantified variable introduced does have a value.
+
 $$\begin{align}
 even(m) \wedge even(n) \implies even(m + n) && \text{(goal)} \\
 even(m) \implies \exists a: 2a = m, && \text{(definition)}\\
@@ -168,7 +177,9 @@ even(m + n) \implies \exists c: 2c = m+n, && \text{(definition)}\\
 2c = 2a + 1 + 2b + 1, && \text{(substitution for $m$, $n$)}\\
 c = a+b+1 && \text{(integer $c$ exists)}
 \end{align}$$
+
 And lastly, adding an even and an odd number. The sum operation isn't affected by the ordering, so we'll only prove it for one case:
+
 $$\begin{align}
 even(m) \wedge odd(n) \implies odd(m + n) && \text{(goal)} \\
 even(m) \implies \exists a: 2a = m, && \text{(definition)}\\
@@ -177,9 +188,12 @@ odd(m + n) \implies \exists c: 2c+1 = m+n, && \text{(definition)}\\
 2c + 1= 2a + 2b + 1, && \text{(substitution for $m$, $n$)}\\
 c = a+b && \text{(integer $c$ exists)}
 \end{align}$$
+
 # Products of even and odd numbers
+
 In a similar way, we can prove things about the products of even and odd number.
 Firstly, the product of an even integer with any other integer is even.
+
 $$\begin{align}
 even(m) \implies even(m \times n) && \text{(goal)} \\
 even(m) \implies \exists a: 2a = m, && \text{(definition)} \\
@@ -198,4 +212,5 @@ odd(m \times n) \implies \exists c: 2c+1 = m \times n && \text{(definition)} \\
 2c + 1 = 2(2ab + a + b) + 1 && \text{(factorise)}\\ 
 c = 2ab + a + b && \text{(integer $c$ exists)}
 \end{align}$$
+
 [^1]: A *predicate* is a function that evaluates to a truth value. They are sometimes called indicator functions. They are also sometimes thought of as unary *relations*, where relations are usually used to relate multiple things together.
