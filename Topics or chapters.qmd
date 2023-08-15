@@ -3,7 +3,7 @@
 -   branching nodes
 -   natural numbers
 -   prime numbers
--   factorisation
+-   mdfactorisation
 -   function composition
 -   relations, injective, bijective, multi-valued, inverse
 -   getting rid of fractions
