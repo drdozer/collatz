@@ -1,3 +1,4 @@
 /.quarto/
 out
 /.obsidian/
+*ipynb
