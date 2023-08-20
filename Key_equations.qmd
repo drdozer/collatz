@@ -46,5 +46,5 @@ $$\begin{align}
 ee(a) &= \langle 4a+2,& a \rangle \\
 eeo(a) &= \langle 4a,& 3a \rangle \\
 eo(a) &= \langle 2a+1,& 3a+2 \rangle \\
-e^\infty o(a) &= &3a+1 \rangle \\
+e^\infty o(a) &= \langle \infty, &3a+1 \rangle \\
 \end{align}$$
